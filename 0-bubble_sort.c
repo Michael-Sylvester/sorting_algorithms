@@ -33,7 +33,7 @@ void bubble_sort(int *array, size_t size)
  *@pos2: the 2nd position
  *Return: the sorted array
  */
-void swap(int *array, int pos1, int pos2)
+void swap(int *array, size_t pos1, size_t pos2)
 {
 	int temp = array[pos1];
 

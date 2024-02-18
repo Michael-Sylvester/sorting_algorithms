@@ -33,9 +33,13 @@ void selection_sort(int *array, size_t size)
 
 		if (sorted)
 			break;
-		swap(array, s_head, smallest);
-		print_array(array, size);
+		if (s_head != smallest)
+		{
+			swap(array, s_head, smallest);
+			print_array(array, size);
+		}
 		s_head++;
+
 	}
 }
 
@@ -46,7 +50,7 @@ void selection_sort(int *array, size_t size)
  *@pos2: the 2nd position
  *Return: the sorted array
  */
-void swap(int *array, int pos1, int pos2)
+void swap(int *array, size_t pos1, size_t pos2)
 {
 	int temp = array[pos1];
 
