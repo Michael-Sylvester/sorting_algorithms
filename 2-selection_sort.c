@@ -27,7 +27,7 @@ void selection_sort(int *array, size_t size)
 		/*Check if array is fullly ordered*/
 		for (index = 0; index < size - 1; index++)
 		{
-			if (array[index] >= array[index + 1])
+			if (array[index] > array[index + 1])
 				sorted = 0;
 		}
 
