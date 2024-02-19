@@ -10,7 +10,7 @@ void bubble_sort(int *array, size_t size)
 	int sorted = 0;
 	size_t n = 0;
 
-	while (sorted == 0)
+	while (sorted == 0 && array != NULL)
 	{
 		sorted = 1;
 		for (n = 0; n < size - 1; n++)
