@@ -20,12 +20,14 @@ void merge_sort(int *array, size_t size)
  */
 void true_merge_sort(int *array, int low, int high)
 {
-	int mid = (high + low) / 2;
+	int mid = low + (high - low) / 2;
 
+	/*printf("low = %d\thigh = %d\tmid = %d\n\n", low, high, mid);*/
 	if (low < high)
 	{
 		true_merge_sort(array, low, mid);
 		true_merge_sort(array, mid + 1, high);
+
 		merge(array, low, mid, high);
 	}
 }
@@ -78,7 +80,7 @@ void merge(int *array, int low, int mid, int high)
 	}
 	finish_merge(larr, left, lsize, array, new);
 	finish_merge(rarr, right, rsize, array, new);
-	print_merge(larr, lsize + rsize, "done");
+	print_merge(larr, lsize + rsize, "Done");
 	free(larr);
 }
 
