@@ -7,81 +7,60 @@
  */
 void merge_sort(int *array, size_t size)
 {
-	if (array != NULL && size > 0)
-		true_merge_sort(array, 0, size - 1);
-}
+	size_t mid = size / 2;
+	int *temp = NULL;
 
-/**
- * true_merge_sort - recursiveky calls itself to divide array and sort
- *@array: the array to be sorted
- *@low: The first index of the array
- *@high: the last index of the array
- *Return: the sorted array
- */
-void true_merge_sort(int *array, int low, int high)
-{
-	int mid = low + (high - low) / 2;
-
-	/*printf("low = %d\thigh = %d\tmid = %d\n\n", low, high, mid);*/
-	if (low < high)
-	{
-		true_merge_sort(array, low, mid);
-		true_merge_sort(array, mid + 1, high);
-
-		merge(array, low, mid, high);
-	}
-}
-
-/**
- * merge - merges two arrays in sorted order
- *@array: the array to be sorted
- *@low: The first index of the array
- *@mid: The midle index of the array
- *@high: the last index of the array
- *Return: the sorted array
- */
-void merge(int *array, int low, int mid, int high)
-{
-	int left, right, new;
-	int const lsize = mid - low + 1;
-	int const rsize = high - mid;
-	int *larr = malloc((lsize + rsize) * sizeof(int));
-	int *rarr = larr + lsize;
-
-	if (larr == NULL)
+	if (array == NULL || size <= 1)
 		return;
-	for (left = 0; left < lsize; left++)
-	{
-		larr[left] = array[low + left];
-	}
-	for (right = 0; right < rsize; right++)
-	{
-		rarr[right] = array[mid + 1 + right];
-	}
-	right = 0;
-	left = 0;
-	new = low;
+	
+	temp = malloc(size * sizeof(int));
+	if (temp == NULL)
+		return;
+	
+	memcpy(temp, array, size * sizeof(int));
+
+	merge_sort(temp, mid);
+	merge_sort(temp + mid, size - mid);
+	merge(array, temp, temp + mid, mid, size - mid);
+	free(temp);
+}
+
+/**
+ *merge - merges two arrays in sorted order
+ *@array: the array to be sorted
+ *@larr: the left array
+ *@rarr: The right array
+ *@lsize: size of left array
+ *@rsize: size of right array
+ *Return: the sorted array
+ */
+void merge(int *array, int *larr, int *rarr, int lsize, int rsize)
+{
+	int i = 0;
+	int j = 0;
+	int k = 0;
+
 	printf("Merging...\n");
 	print_merge(larr, lsize, "left");
 	print_merge(rarr, rsize, "right");
-	while (left < lsize && right < rsize)
+
+	while (i < lsize && j < rsize)
 	{
-		if (larr[left] <= rarr[right])
+		if (larr[i] <= rarr[j])
 		{
-			array[new] = larr[left];
-			left++;
+			array[k] = larr[i];
+			i++;
 		}
 		else
 		{
-			array[new] = rarr[right];
-			right++;
+			array[k] = rarr[j];
+			j++;
 		}
-		new++;
+		k++;
 	}
-	finish_merge(larr, left, lsize, array, new);
-	finish_merge(rarr, right, rsize, array, new);
+	finish_merge(larr, i, lsize, array, k);
+	finish_merge(rarr, j, rsize, array, k);
 	print_merge(larr, lsize + rsize, "Done");
-	free(larr);
 }
 
 /**

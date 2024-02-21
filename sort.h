@@ -34,7 +34,7 @@ void listswap(listint_t *prev_pos, listint_t *next_pos, listint_t **list);
 int Lomuto_partition(int *array, int low, int high, size_t size);
 void true_quick_sort(int *array, int low, int high, size_t size);
 void true_merge_sort(int *array, int low, int high);
-void merge(int *array, int low, int mid, int high);
+void merge(int *array, int *larr, int *rarr, int lsize, int rsize);
 void print_merge(int *array, int size, char *msg);
 void finish_merge(int *temp_array, int tindex,
 				  int tsize, int *array, int index);
