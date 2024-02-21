@@ -37,6 +37,6 @@ void true_merge_sort(int *array, int low, int high);
 void merge(int *array, int *larr, int *rarr, int lsize, int rsize);
 void print_merge(int *array, int size, char *msg);
 void finish_merge(int *temp_array, int tindex,
-				  int tsize, int *array, int index);
+				  int tsize, int *array, int *index);
 
 #endif

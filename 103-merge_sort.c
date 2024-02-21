@@ -12,11 +12,11 @@ void merge_sort(int *array, size_t size)
 
 	if (array == NULL || size <= 1)
 		return;
-	
+
 	temp = malloc(size * sizeof(int));
 	if (temp == NULL)
 		return;
-	
+
 	memcpy(temp, array, size * sizeof(int));
 
 	merge_sort(temp, mid);
@@ -58,9 +58,9 @@ void merge(int *array, int *larr, int *rarr, int lsize, int rsize)
 		}
 		k++;
 	}
-	finish_merge(larr, i, lsize, array, k);
-	finish_merge(rarr, j, rsize, array, k);
-	print_merge(larr, lsize + rsize, "Done");
+	finish_merge(larr, i, lsize, array, &k);
+	finish_merge(rarr, j, rsize, array, &k);
+	print_merge(array, k, "Done");
 }
 
 /**
@@ -74,13 +74,13 @@ void merge(int *array, int *larr, int *rarr, int lsize, int rsize)
  *Return: the sorted array
  */
 void finish_merge(int *temp_array, int tindex,
-				  int tsize, int *array, int index)
+				  int tsize, int *array, int *index)
 {
 	while (tindex < tsize)
 	{
-		array[index] = temp_array[tindex];
+		array[*index] = temp_array[tindex];
 		tindex++;
-		index++;
+		*index = *index + 1;
 	}
 }
 
