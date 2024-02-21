@@ -7,7 +7,8 @@
  */
 void merge_sort(int *array, size_t size)
 {
-	true_merge_sort(array, 0, size - 1);
+	if (array != NULL && size > 0)
+		true_merge_sort(array, 0, size - 1);
 }
 
 /**
