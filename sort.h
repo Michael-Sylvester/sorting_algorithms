@@ -28,6 +28,7 @@ void insertion_sort_list(listint_t **list);
 void selection_sort(int *array, size_t size);
 void quick_sort(int *array, size_t size);
 void merge_sort(int *array, size_t size);
+void cocktail_sort_list(listint_t **list);
 
 void swap(int *array, size_t pos1, size_t pos2);
 void listswap(listint_t *prev_pos, listint_t *next_pos, listint_t **list);
