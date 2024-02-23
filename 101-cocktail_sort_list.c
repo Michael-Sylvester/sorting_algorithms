@@ -8,17 +8,15 @@ void cocktail_sort_list(listint_t **list)
 {
 	listint_t *temp = NULL;
 	listint_t *next = NULL;
-	listint_t *prev = NULL;
 	listint_t *leftsort = NULL;
 	listint_t *rightsort = NULL;
 	int sorted = 0;
 
 	if (list != NULL && *list != NULL)
-		{
-			temp = *list;
-			prev = temp;
-			next = temp->next;
-		}
+	{
+		temp = *list;
+		next = temp->next;
+	}
 	else
 		return;
 
@@ -43,27 +41,40 @@ void cocktail_sort_list(listint_t **list)
 			}
 		}
 		rightsort = temp;
-		prev = temp->prev;
-		while (prev != NULL && prev != leftsort)
-		{
-			if (temp->n < prev->n)
-			{
-				listswap(prev, temp, list);				
-				sorted = 0;
-				prev = temp->prev;
-				print_list(*list);
-			}
-			else
-			{
-				temp = prev;
-				prev = temp->prev;
-			}
-		}
+		sorted = checkleft(list, &temp, leftsort);
 		leftsort = temp;
 	}
 }
 
+/**
+ * checkleft - cocktail sort in the left direction
+ *@list: the array being sorted
+ *@temp: double pointer to our location in the list
+ *@leftsort: last known sorted location
+ *Return: the sorted array
+ */
+int checkleft(listint_t **list, listint_t **temp, listint_t *leftsort)
+{
+	int sorted = 1;
+	listint_t *prev = (*temp)->prev;
 
+	while (prev != NULL && prev != leftsort)
+	{
+		if ((*temp)->n < prev->n)
+		{
+			listswap(prev, *temp, list);
+			sorted = 0;
+			prev = (*temp)->prev;
+			print_list(*list);
+		}
+		else
+		{
+			*temp = prev;
+			prev = (*temp)->prev;
+		}
+	}
+	return (sorted);
+}
 
 /**
  * listswap - swap the positions of 2 nodes in a double linked list

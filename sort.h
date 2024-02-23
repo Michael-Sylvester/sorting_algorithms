@@ -37,6 +37,7 @@ void true_quick_sort(int *array, int low, int high, size_t size);
 void true_merge_sort(int *array, int low, int high);
 void merge(int *array, int *larr, int *rarr, int lsize, int rsize);
 void print_merge(int *array, int size, char *msg);
+int checkleft(listint_t **list, listint_t **temp,listint_t *leftsort);
 void finish_merge(int *temp_array, int tindex,
 				  int tsize, int *array, int *index);
 
